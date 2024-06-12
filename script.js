@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatDiv = document.getElementById('chat');
   let currentUser = null;
 
-  // Handle user registration
+  // Manejar el registro de usuario
   registerForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const username = document.getElementById('register-username').value;
     const password = document.getElementById('register-password').value;
 
-    fetch('/auth/register', {
+    fetch('https://chatserver-smpb.onrender.com/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -30,13 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Handle user login
+  // Manejar el inicio de sesión de usuario
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
 
-    fetch('/auth/login', {
+    fetch('https://chatserver-smpb.onrender.com/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -56,9 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Fetch and display messages
+  // Obtener y mostrar mensajes
   function loadMessages() {
-    fetch('/api/messages')
+    fetch('https://chatserver-smpb.onrender.com/api/messages')
       .then(response => response.json())
       .then(messages => {
         messagesDiv.innerHTML = '';
@@ -70,24 +70,24 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // Long polling for new messages
+  // Polling largo para nuevos mensajes
   function pollMessages() {
-    fetch('/api/messages/long-poll')
+    fetch('https://chatserver-smpb.onrender.com/api/messages/long-poll')
       .then(response => response.json())
       .then(newMessage => {
         const messageElement = document.createElement('div');
         messageElement.textContent = `${newMessage.username}: ${newMessage.message}`;
         messagesDiv.appendChild(messageElement);
-        pollMessages(); // Recursively call to keep polling
+        pollMessages(); // Llamar recursivamente para continuar el polling
       })
       .catch(() => {
-        setTimeout(pollMessages, 5000); // Retry after 5 seconds if there's an error
+        setTimeout(pollMessages, 5000); // Reintentar después de 5 segundos si hay un error
       });
   }
 
-  pollMessages(); // Start long polling
+  pollMessages(); // Iniciar el polling largo
 
-  // Submit a new message
+  // Enviar un nuevo mensaje
   messageForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const message = document.getElementById('message').value;
 
-    fetch('/api/messages', {
+    fetch('https://chatserver-smpb.onrender.com/api/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
