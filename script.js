@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = document.getElementById('register-username').value;
     const password = document.getElementById('register-password').value;
 
-    fetch('https://chatserver-smpb.onrender.com/auth/register', {
+    fetch('https://chatserver-1-j9yd.onrender.com', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
 
-    fetch('https://chatserver-smpb.onrender.com/auth/login', {
+    fetch('https://chatserver-1-j9yd.onrender.com', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Obtener y mostrar mensajes
   function loadMessages() {
-    fetch('https://chatserver-smpb.onrender.com/api/messages')
+    fetch('https://chatserver-1-j9yd.onrender.com')
       .then(response => response.json())
       .then(messages => {
         messagesDiv.innerHTML = '';
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Polling largo para nuevos mensajes
   function pollMessages() {
-    fetch('https://chatserver-smpb.onrender.com/api/messages/long-poll')
+    fetch('https://chatserver-1-j9yd.onrender.com')
       .then(response => response.json())
       .then(newMessage => {
         const messageElement = document.createElement('div');
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const message = document.getElementById('message').value;
 
-    fetch('https://chatserver-smpb.onrender.com/api/messages', {
+    fetch('https://chatserver-1-j9yd.onrender.com', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
