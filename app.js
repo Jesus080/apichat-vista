@@ -7,13 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatDiv = document.getElementById('chat');
   let currentUser = null;
 
+  // URL base del servidor
+  const serverUrl = 'https://chatserver-1-j9yd.onrender.com';
+
   // Manejar el registro de usuario
   registerForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const username = document.getElementById('register-username').value;
     const password = document.getElementById('register-password').value;
 
-    fetch('https://chatserver-1-j9yd.onrender.com', {
+    fetch(`${serverUrl}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -36,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
 
-    fetch('https://chatserver-1-j9yd.onrender.com', {
+    fetch(`${serverUrl}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -58,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Obtener y mostrar mensajes
   function loadMessages() {
-    fetch('https://chatserver-1-j9yd.onrender.com')
+    fetch(`${serverUrl}/api/messages`)
       .then(response => response.json())
       .then(messages => {
         messagesDiv.innerHTML = '';
@@ -72,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Polling largo para nuevos mensajes
   function pollMessages() {
-    fetch('https://chatserver-1-j9yd.onrender.com')
+    fetch(`${serverUrl}/api/messages/long-poll`)
       .then(response => response.json())
       .then(newMessage => {
         const messageElement = document.createElement('div');
@@ -98,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const message = document.getElementById('message').value;
 
-    fetch('https://chatserver-1-j9yd.onrender.com', {
+    fetch(`${serverUrl}/api/messages`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
