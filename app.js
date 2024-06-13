@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentUser = null;
 
   // URL base del servidor
-  const serverUrl = 'https://chatserver-1-j9yd.onrender.com';
+  const serverUrl = 'https://chser.onrender.com';
 
   // Manejar el registro de usuario
   registerForm.addEventListener('submit', (event) => {
